@@ -5,6 +5,8 @@
  */
 package cinema;
 
+import view.MainUI;
+
 /**
  *
  * @author Julliano
@@ -15,7 +17,7 @@ public class Cinema {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        System.out.println("Olá!!!");
+        new MainUI().executar();
     }
     
 }

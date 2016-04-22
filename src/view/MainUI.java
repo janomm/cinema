@@ -20,20 +20,14 @@ public class MainUI {
             System.out.println(MainMenu.getOpcoes());
             opcao = Console.scanInt("Digite sua opção:");
             switch (opcao) {
-                case MainMenu.OP_PACIENTES:
+                case MainMenu.OP_CADASTROS:
                     //new PacienteUI(listaPacientes).executar();
                     break;
-                case MainMenu.OP_MEDICAMENTOS:
+                case MainMenu.OP_VENDA:
                     //new MedicamentoUI(listaMedicamentos).executar();
                     break;
-                case MainMenu.OP_CONSULTA:
+                case MainMenu.OP_RELATORIOS:
                     //new ConsultaUI(listaPacientes,listaMedicamentos,listaConsultas).executar();
-                    break;
-                case MainMenu.OP_AGENDA:
-                    //new AgendaUI(listaPacientes,agenda).executar();
-                    break;
-                case MainMenu.OP_HISTORICO:
-                    //new HistoricoUI(listaConsultas).executar();
                     break;
                 case MainMenu.OP_SAIR:
                     System.out.println("Aplicação finalizada!!!");
