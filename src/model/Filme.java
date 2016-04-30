@@ -57,4 +57,11 @@ public class Filme {
         this.sinopse = sinopse;
     }
     
+    public void imprimeFilme(){
+        System.out.println("Código: " + this.codigo
+                           + "\nNome: " + this.nome 
+                           + "\nGênero: " + this.genero
+                           + "\nSinopse: " + this.sinopse);
+    }
+    
 }

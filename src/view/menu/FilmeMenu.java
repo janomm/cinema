@@ -9,13 +9,16 @@ package view.menu;
  *
  * @author Julliano
  */
-public class FimeMenu {
+public class FilmeMenu {
     public static final int OP_NOVO = 1;
     public static final int OP_REMOVER = 2;
     public static final int OP_EDITAR = 3;
     public static final int OP_LISTAR = 4;
     public static final int OP_CONSULTAR = 5;
     public static final int OP_VOLTAR = 0;
+    
+    public static final int OP_ALTERAGENERO = 1;
+    public static final int OP_ALTERASINOPSE = 2;
     
     public static String getOpcoes(){
         return("\n--------------------------------------\n"
@@ -27,6 +30,13 @@ public class FimeMenu {
                 + "0- Voltar"
                 + "\n--------------------------------------");
         
+    }
+    public static String getOpcoesAlteracao(){
+        return("\n--------------------------------------\n"
+                + "1- Altera Gênero\n"
+                + "2- Altera Sinopse\n"
+                + "0- Voltar"
+                + "\n--------------------------------------");
     }
     
 }
