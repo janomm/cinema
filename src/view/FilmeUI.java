@@ -171,6 +171,18 @@ public class FilmeUI {
                     System.out.println("Opção inválida..");
             }
         } while (opcao != FilmeMenu.OP_VOLTAR);
-        
+    }
+    
+    public boolean existeFilme(){
+        return (!lista.equals(null));
+    }
+    
+    public Filme buscaFilme(int codigo){
+        for (Filme filme : lista.getListaFilmes()){
+            if(filme.getCodigo().equals(codigo)){
+                return filme;
+            }
+        }
+        return null;
     }
 }

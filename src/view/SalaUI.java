@@ -131,4 +131,17 @@ public class SalaUI {
             listaSala(numero);
         }
     }
+    
+    public boolean existeSala(){
+        return (!lista.equals(null));
+    }
+    
+    public Sala buscaSala(int numero){
+        for (Sala sala : lista.getListaSalas()){
+            if(sala.getNumero().equals(numero)){
+                return sala;
+            }
+        }
+        return null;
+    }
 }

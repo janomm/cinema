@@ -40,7 +40,7 @@ public class MainUI {
                     new SalaUI(listaSalas).executar();
                     break;
                 case MainMenu.OP_SECAO:
-                    new SecaoUI(listaSecoes).executar();
+                    new SecaoUI(listaSecoes,listaSalas,listaFilmes).executar();
                     break;
                 case MainMenu.OP_VENDA:
                     //new VendaUI(listaSecoes,listaFilmes,listaSalas).executar();

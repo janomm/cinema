@@ -30,6 +30,10 @@ public class DateUtil {
         return(dataString);
     }
     
+    public static Date stringToHour(String hora) throws ParseException{
+        return(new SimpleDateFormat("HH:mm").parse(hora));
+    }
+    
     public static boolean verificaData(String data)
     {
        return(data.matches("\\d{2}/\\d{2}/\\d{4}"));

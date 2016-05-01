@@ -6,8 +6,10 @@
 package repositorio;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import model.Filme;
+import model.Sala;
 import model.Secao;
 
 /**
@@ -19,5 +21,13 @@ public class RepositorioSecao {
     
     public RepositorioSecao(){
         listaSecoes = new ArrayList<>();
+    }
+
+    public List<Secao> getListaSecoes() {
+        return listaSecoes;
+    }
+    
+    private boolean addSecao(Filme filme, Sala sala, Date hora){
+        return true;
     }
 }
