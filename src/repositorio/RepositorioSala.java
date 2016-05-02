@@ -25,9 +25,7 @@ public class RepositorioSala {
     }
     
     public boolean addSala(int assento){
-        Sala sala = new Sala();
-        sala.setAssentos(assento);
-        sala.setNumero(retornaNumero());
+        Sala sala = new Sala(retornaNumero(), assento);
         return (listaSalas.add(sala));
     }
     
@@ -80,6 +78,14 @@ public class RepositorioSala {
             }
         }
         return false;
+    }
+    
+    public Integer quantidadeSala(){
+        int cont = 0;
+        for (Sala sala : listaSalas){
+            cont++;
+        }
+        return cont;
     }
     
 }

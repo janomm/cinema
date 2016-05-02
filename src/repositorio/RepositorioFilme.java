@@ -25,11 +25,7 @@ public class RepositorioFilme {
     }
 
     public boolean addFilme(String nome, String genero, String sinopse){
-        Filme filme = new Filme();
-        filme.setNome(nome);
-        filme.setGenero(genero);
-        filme.setSinopse(sinopse);
-        filme.setCodigo(retornaCodigo());
+        Filme filme = new Filme(retornaCodigo(), nome, genero, sinopse);
         return (listaFilmes.add(filme));
     }
 
@@ -101,5 +97,13 @@ public class RepositorioFilme {
             }
         }
         return false;
+    }
+    
+    public Integer quantidadeFilmes(){
+        int cont = 0;
+        for (Filme filme : listaFilmes){
+            cont++;
+        }
+        return cont;
     }
 }

@@ -8,6 +8,7 @@ package view;
 import java.util.Date;
 import model.Filme;
 import model.Sala;
+import model.Secao;
 import repositorio.RepositorioFilme;
 import repositorio.RepositorioSala;
 import repositorio.RepositorioSecao;
@@ -52,10 +53,10 @@ public class SecaoUI {
                     insereSecao();
                     break;
                 case SecaoMenu.OP_REMOVER:
-                    //removeSala();
+                    removeSecao();
                     break;
                 case SecaoMenu.OP_EDITAR:
-                    //editaSala();
+                    editaSecao();
                     break;
                 case SecaoMenu.OP_LISTAR:
                     //listaSala();
@@ -73,20 +74,24 @@ public class SecaoUI {
     }
     
     public boolean insereSecao(){
+        Filme filme;
+        Sala sala;
+        Date hora;
+        FilmeUI filmeUI = new FilmeUI(listaFilmes);
+        SalaUI salaUI = new SalaUI(listaSalas);
         
-        if(!new SalaUI(listaSalas).existeSala()){
+        if(listaSalas.quantidadeSala().equals(0)){
             System.out.println("Salas não cadastradas.");
             return false;
         }
-        
-        if(!new FilmeUI(listaFilmes).existeFilme()){
+        if(listaFilmes.quantidadeFilmes().equals(0)){
             System.out.println("Salas não cadastradas.");
             return false;
         }
-        
         try{
+            filmeUI.listaFilmes();
             int codigo = Console.scanInt("Selecione o código do filme: ");
-            Filme filme = new FilmeUI(listaFilmes).buscaFilme(codigo);
+            filme = new FilmeUI(listaFilmes).buscaFilme(codigo);
             if (filme.equals(null)){
                 System.out.println("Código do Filme não cadastrado.");
                 return false;
@@ -95,10 +100,10 @@ public class SecaoUI {
             System.out.println("Código inválido.");
             return false;
         }
-        
         try{
+            salaUI.listaSala();
             int numero = Console.scanInt("Selecione o número da sala: ");
-            Sala sala = new SalaUI(listaSalas).buscaSala(numero);
+            sala = new SalaUI(listaSalas).buscaSala(numero);
             if(sala.equals(null)){
                 System.out.println("Número da sala não cadastrado.");
                 return false;
@@ -107,18 +112,115 @@ public class SecaoUI {
             System.out.println("Número inválido.");
             return false;
         }
-        
         try{
             String h = Console.scanString("Digite a Hora: ");
-            Date hora = DateUtil.stringToHour(h);
+            hora = DateUtil.stringToHour(h);
         } catch (Exception ex){
             System.out.println("Hora Inválida.");
+            return false;
         }
-        
-        
-        
-        
+        if(listaSecao.addSecao(filme, sala, hora)){
+            System.out.println("Seção inserida.");
+            return true;
+        } else{
+            System.out.println("Seção não inserida.");
+            return false;
+        }
+    }
+    
+    
+    public boolean removeSecao(){
+        if (listaSecao.equals(null)) {
+            System.out.println("Nenhuma seção cadastrada.");
+            return false;
+        }
+        listaSecao();
+        Integer numero = Console.scanInt("Número: ");
+        if(!listaSecao.secaoExiste(numero)){
+            System.out.println("Seção não cadastrada.");
+        } else {
+            if(!listaSecao.deletaSecao(numero)){
+                System.out.println("Seção não Removida.");
+            } else {
+                System.out.println("Seção Removida.");
+            }
+        }
         
         return true;
     }
+    
+    public void listaSecao(){
+        System.out.println("-----------------------------\n");
+        System.out.println(String.format("%-10s", "NÚMERO") + "\t"
+                         + String.format("%-20s", "|FILME") + "\t"
+                         + String.format("%-10s", "|SALA") + "\t"
+                         + String.format("%-10s", "|HORÁRIO") + "\t");
+        for (Secao secao : listaSecao.getListaSecoes()){
+            System.out.println(String.format("%-10s", secao.getNumero()) + "\t"
+            + String.format("%-20s", "|" + secao.getFilme().getNome()) + "\t"
+            + String.format("%-10s", "|" + secao.getSala().getNumero()) + "\t"
+            + String.format("%-10s", "|" + secao.getHorario()) + "\t");
+        }
+    }
+    
+    public void editaSecao(){
+        listaSecao();
+        int numero = Console.scanInt("Código: ");
+        if(!listaSecao.secaoExiste(numero)){
+            System.out.println("Seção não cadastrada.");
+        } else {
+            Secao s = listaSecao.retornaSecao(numero);
+            Secao secao = selecionaAlteracao(s);
+        }
+    }
+    
+    public boolean secaoExiste(Integer numero){
+        for (Secao secao : listaSecao.getListaSecoes()){
+            if (secao.getNumero().equals(numero)){
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public Secao selecionaAlteracao(Secao secao){
+        int opcao = 0;
+        do {
+            System.out.println(SecaoMenu.getOpcoesAlteracao());
+            opcao = Console.scanInt("Digite sua opção:");
+            switch (opcao) {
+                case SecaoMenu.OP_ALTERAFILME:
+                    /*if(listaSecao.alteraFilme(filme, genero)){
+                        System.out.println("Filme Alterado.");
+                    } else {
+                        System.out.println("Alteração não Realizada.");
+                    }*/
+                    break;
+                case SecaoMenu.OP_ALTERASALA:
+                    /*String sinopse = Console.scanString("Sinopse: ");
+                    if(listaSalas.alteraSala(filme, sinopse)){
+                        System.out.println("Sala Alterada.");
+                    } else{
+                        System.out.println("Alteração não Realizada.");
+                    }*/
+                    break;
+                case SecaoMenu.OP_ALTERAHORA:
+                    /*if(listaSecao.alteraHora(filme, sinopse)){
+                        System.out.println("Hora Alterada.");
+                    } else{
+                        System.out.println("Alteração não Realizada.");
+                    }*/
+                    break;
+                case SecaoMenu.OP_VOLTAR:
+                    System.out.println("Retornando ao menu principal..");
+                    break;
+                default:
+                    System.out.println("Opção inválida..");
+            }
+        } while (opcao != SecaoMenu.OP_VOLTAR);
+        
+        return null;
+    }
+    
+    
 }

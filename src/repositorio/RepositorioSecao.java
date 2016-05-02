@@ -27,7 +27,49 @@ public class RepositorioSecao {
         return listaSecoes;
     }
     
-    private boolean addSecao(Filme filme, Sala sala, Date hora){
-        return true;
+    public boolean addSecao(Filme filme, Sala sala, Date hora){
+        Secao secao = new Secao(sala, hora, filme, retornaCodigo());
+        return (listaSecoes.add(secao));
+        
+    }
+    
+    public int retornaCodigo(){
+        int numero = 0;
+        for (Secao secao : listaSecoes){
+            if(secao.getNumero()> numero){
+                numero = secao.getNumero();
+            }
+        }
+        numero++;
+        return numero;
+    }
+    
+    public boolean secaoExiste(Integer numero){
+        for (Secao secao : listaSecoes){
+            if(secao.getNumero().equals(numero))
+                return true;
+        }
+        return false;
+    }
+    
+    public boolean deletaSecao(Integer numero){
+        for (Secao secao : listaSecoes){
+            if (secao.getNumero().equals(numero)){
+                listaSecoes.remove(secao);
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public Secao retornaSecao(int numero){
+        Secao s = new Secao();
+        for (Secao secao : listaSecoes){
+            if(secao.getNumero().equals(numero)){
+                s = secao;
+                break;
+            }
+        }
+        return s;
     }
 }
