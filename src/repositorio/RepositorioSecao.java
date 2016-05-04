@@ -84,4 +84,31 @@ public class RepositorioSecao {
         }
         return false;
     }
+    
+    public boolean achouSecaoFilme(int codigo){
+        for (Secao s : listaSecoes){
+            if(s.getFilme().getCodigo().equals(codigo)){
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public boolean achouSecaoSala(int numero){
+        for (Secao s : listaSecoes){
+            if(s.getSala().getNumero().equals(numero)){
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public boolean achouSecaoHora(Date horario){
+        for (Secao s : listaSecoes){
+            if(s.getHorario().equals(horario)){
+                return true;
+            }
+        }
+        return false;
+    }
 }

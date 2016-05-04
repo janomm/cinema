@@ -30,7 +30,7 @@ public class SecaoUI {
         this.listaSalas = listaSala;
         this.listaFilmes = listaFilme;
     }
-
+    
     public RepositorioSecao getListaSecao() {
         return listaSecao;
     }
@@ -150,6 +150,20 @@ public class SecaoUI {
     }
     
     public void listaSecao(){
+        System.out.println("-----------------------------\n");
+        System.out.println(String.format("%-10s", "SEÇÃO") + "\t"
+                         + String.format("%-20s", "|FILME") + "\t"
+                         + String.format("%-10s", "|SALA") + "\t"
+                         + String.format("%-10s", "|HORÁRIO") + "\t");
+        for (Secao secao : listaSecao.getListaSecoes()){
+            System.out.println(String.format("%-10s", secao.getNumero()) + "\t"
+            + String.format("%-20s", "|" + secao.getFilme().getNome()) + "\t"
+            + String.format("%-10s", "|" + secao.getSala().getNumero()) + "\t"
+            + String.format("%-10s", "|" + DateUtil.hourToString(secao.getHorario())) + "\t");
+        }
+    }
+    
+    public void listaSecaoFilme(int numero){
         System.out.println("-----------------------------\n");
         System.out.println(String.format("%-10s", "SEÇÃO") + "\t"
                          + String.format("%-20s", "|FILME") + "\t"

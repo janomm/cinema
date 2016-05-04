@@ -9,6 +9,7 @@ import model.Filme;
 import repositorio.RepositorioFilme;
 import repositorio.RepositorioSala;
 import repositorio.RepositorioSecao;
+import repositorio.RepositorioVenda;
 import view.menu.MainMenu;
 
 import util.Console;
@@ -21,11 +22,13 @@ public class MainUI {
     private RepositorioFilme listaFilmes;
     private RepositorioSecao listaSecoes;
     private RepositorioSala listaSalas;
+    private RepositorioVenda listaVendas;
     
     public MainUI() {
         listaFilmes = new RepositorioFilme();
         listaSecoes = new RepositorioSecao();
         listaSalas  = new RepositorioSala();
+        listaVendas = new RepositorioVenda();
         //Filme f = new Filme(1, "Cemitério Maldito", "Terror", "Animais voltam amaldiçoados");
     }
     
@@ -45,7 +48,7 @@ public class MainUI {
                     new SecaoUI(listaSecoes,listaSalas,listaFilmes).executar();
                     break;
                 case MainMenu.OP_VENDA:
-                    //new VendaUI(listaSecoes,listaFilmes,listaSalas).executar();
+                    new VendaUI(listaVendas,listaSecoes,listaSalas,listaFilmes).executar();
                     break;
                 case MainMenu.OP_RELATORIOS:
                     //new ConsultaUI(listaPacientes,listaMedicamentos,listaConsultas).executar();
