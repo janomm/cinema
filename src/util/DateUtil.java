@@ -34,6 +34,12 @@ public class DateUtil {
         return(new SimpleDateFormat("HH:mm").parse(hora));
     }
     
+    public static String hourToString(Date data){
+        SimpleDateFormat formatador = new SimpleDateFormat("HH:mm");
+        String dataString = formatador.format(data);
+        return(dataString);
+    }
+    
     public static boolean verificaData(String data)
     {
        return(data.matches("\\d{2}/\\d{2}/\\d{4}"));

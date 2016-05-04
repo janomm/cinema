@@ -5,6 +5,7 @@
  */
 package view;
 
+import model.Filme;
 import repositorio.RepositorioFilme;
 import repositorio.RepositorioSala;
 import repositorio.RepositorioSecao;
@@ -25,6 +26,7 @@ public class MainUI {
         listaFilmes = new RepositorioFilme();
         listaSecoes = new RepositorioSecao();
         listaSalas  = new RepositorioSala();
+        //Filme f = new Filme(1, "Cemitério Maldito", "Terror", "Animais voltam amaldiçoados");
     }
     
     public void executar() {

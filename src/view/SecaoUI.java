@@ -59,10 +59,10 @@ public class SecaoUI {
                     editaSecao();
                     break;
                 case SecaoMenu.OP_LISTAR:
-                    //listaSala();
+                    listaSecao();
                     break;
                 case SecaoMenu.OP_CONSULTAR:
-                    //consultaSala();
+                    consultaSecao();
                     break;
                 case SecaoMenu.OP_VOLTAR:
                     System.out.println("Retornando ao menu principal..");
@@ -151,7 +151,7 @@ public class SecaoUI {
     
     public void listaSecao(){
         System.out.println("-----------------------------\n");
-        System.out.println(String.format("%-10s", "NÚMERO") + "\t"
+        System.out.println(String.format("%-10s", "SEÇÃO") + "\t"
                          + String.format("%-20s", "|FILME") + "\t"
                          + String.format("%-10s", "|SALA") + "\t"
                          + String.format("%-10s", "|HORÁRIO") + "\t");
@@ -159,7 +159,7 @@ public class SecaoUI {
             System.out.println(String.format("%-10s", secao.getNumero()) + "\t"
             + String.format("%-20s", "|" + secao.getFilme().getNome()) + "\t"
             + String.format("%-10s", "|" + secao.getSala().getNumero()) + "\t"
-            + String.format("%-10s", "|" + secao.getHorario()) + "\t");
+            + String.format("%-10s", "|" + DateUtil.hourToString(secao.getHorario())) + "\t");
         }
     }
     
@@ -169,8 +169,14 @@ public class SecaoUI {
         if(!listaSecao.secaoExiste(numero)){
             System.out.println("Seção não cadastrada.");
         } else {
-            Secao s = listaSecao.retornaSecao(numero);
-            Secao secao = selecionaAlteracao(s);
+            selecionaAlteracao(numero);
+            
+            
+            /*Secao s = listaSecao.retornaSecao(numero);
+            Secao secRet = selecionaAlteracao(s);
+            if(!secRet.equals(null)){
+                listaSecao.alteraSecao(secRet, numero);
+            }*/
         }
     }
     
@@ -183,33 +189,26 @@ public class SecaoUI {
         return false;
     }
     
-    public Secao selecionaAlteracao(Secao secao){
+    public void selecionaAlteracao(int numero){
         int opcao = 0;
         do {
             System.out.println(SecaoMenu.getOpcoesAlteracao());
             opcao = Console.scanInt("Digite sua opção:");
             switch (opcao) {
                 case SecaoMenu.OP_ALTERAFILME:
-                    /*if(listaSecao.alteraFilme(filme, genero)){
-                        System.out.println("Filme Alterado.");
-                    } else {
-                        System.out.println("Alteração não Realizada.");
-                    }*/
+                    if(!alteraFilme(numero)){
+                        System.out.println("Filme da Seção não Alterado.");
+                    }
                     break;
                 case SecaoMenu.OP_ALTERASALA:
-                    /*String sinopse = Console.scanString("Sinopse: ");
-                    if(listaSalas.alteraSala(filme, sinopse)){
-                        System.out.println("Sala Alterada.");
-                    } else{
-                        System.out.println("Alteração não Realizada.");
-                    }*/
+                    if(!alteraSala(numero)){
+                        System.out.println("Sala da Seção não Alterada.");
+                    }
                     break;
                 case SecaoMenu.OP_ALTERAHORA:
-                    /*if(listaSecao.alteraHora(filme, sinopse)){
-                        System.out.println("Hora Alterada.");
-                    } else{
-                        System.out.println("Alteração não Realizada.");
-                    }*/
+                    if(!alteraHora(numero)){
+                        System.out.println("Hora da Seção não Alterada.");
+                    }
                     break;
                 case SecaoMenu.OP_VOLTAR:
                     System.out.println("Retornando ao menu principal..");
@@ -218,9 +217,145 @@ public class SecaoUI {
                     System.out.println("Opção inválida..");
             }
         } while (opcao != SecaoMenu.OP_VOLTAR);
-        
-        return null;
     }
     
+    public boolean alteraFilme(int numero){
+        try{
+            new FilmeUI(listaFilmes).listaFilmes();
+            Integer codigo = Console.scanInt("Digite Código do Filme: ");
+            Filme filme = listaFilmes.retornaFilme(codigo);
+            for(Secao secao : listaSecao.getListaSecoes()){
+                if(secao.getNumero().equals(numero)){
+                    secao.setFilme(filme);
+                    return true;
+                }
+            }
+            return false;
+        } catch(Exception e){
+            System.err.println("Código inválido.");
+            return false;
+        }
+    }
     
+    public boolean alteraSala(int numero){
+        try{
+            new SalaUI(listaSalas).listaSala();
+            int numSala = Console.scanInt("Digite o numero da Sala: ");
+            Sala sala = listaSalas.retornaSala(numSala);
+            for(Secao secao : listaSecao.getListaSecoes()){
+                if(secao.getNumero().equals(numero)){
+                    secao.setSala(sala);
+                    return true;
+                }
+            }
+            return false;
+        } catch (Exception e){
+            System.err.println("Código inválido.");
+            return false;
+        }
+    }
+    
+    public boolean alteraHora(int numero){
+        try{
+            String hr = Console.scanString("Digite a Hora: ");
+            Date h = DateUtil.stringToHour(hr);
+            for(Secao secao : listaSecao.getListaSecoes()){
+                if(secao.getNumero().equals(numero)){
+                    secao.setHorario(h);
+                    return true;
+                }
+            }
+            return false;
+        } catch (Exception ex){
+            System.out.println("Hora Inválida.");
+            return false;
+        }
+    }
+    
+    public void consultaSecao(){
+        int opcao = 0;
+        do {
+            System.out.println(SecaoMenu.getOpcoesConsulta());
+            opcao = Console.scanInt("Digite sua opção:");
+            switch (opcao) {
+                case SecaoMenu.OP_CONSULTAFILME:
+                    consultaFilme();
+                    break;
+                case SecaoMenu.OP_CONSULTASALA:
+                    consultaSala();
+                    break;
+                case SecaoMenu.OP_CONSULTAHORA:
+                    consultaHora();
+                    break;
+                case SecaoMenu.OP_VOLTAR:
+                    System.out.println("Retornando ao menu principal..");
+                    break;
+                default:
+                    System.out.println("Opção inválida..");
+            }
+        } while (opcao != SecaoMenu.OP_VOLTAR);
+    }
+    
+    public void consultaFilme(){
+        try{
+            int codigo = Console.scanInt("Codigo do Filme: ");
+            System.out.println(String.format("%-10s", "SEÇÃO") + "\t"
+                             + String.format("%-20s", "|FILME") + "\t"
+                             + String.format("%-10s", "|SALA") + "\t"
+                             + String.format("%-10s", "|HORÁRIO") + "\t");
+            for (Secao secao : listaSecao.getListaSecoes()){
+                if(secao.getFilme().getCodigo().equals(codigo)){
+                    System.out.println(String.format("%-10s", secao.getNumero()) + "\t"
+                    + String.format("%-20s", "|" + secao.getFilme().getNome()) + "\t"
+                    + String.format("%-10s", "|" + secao.getSala().getNumero()) + "\t"
+                    + String.format("%-10s", "|" + DateUtil.hourToString(secao.getHorario())) + "\t");
+                }
+            }
+        } catch (Exception e){
+            System.err.println("Código Inválido.");
+        }
+    }
+    
+    public void consultaSala(){
+        try{
+            int numero = Console.scanInt("Número da Sala: ");
+            System.out.println(String.format("%-10s", "SEÇÃO") + "\t"
+                             + String.format("%-20s", "|FILME") + "\t"
+                             + String.format("%-10s", "|SALA") + "\t"
+                             + String.format("%-10s", "|HORÁRIO") + "\t");
+            for (Secao secao : listaSecao.getListaSecoes()){
+                if(secao.getSala().getNumero().equals(numero)){
+                    System.out.println(String.format("%-10s", secao.getNumero()) + "\t"
+                    + String.format("%-20s", "|" + secao.getFilme().getNome()) + "\t"
+                    + String.format("%-10s", "|" + secao.getSala().getNumero()) + "\t"
+                    + String.format("%-10s", "|" + DateUtil.hourToString(secao.getHorario())) + "\t");
+                }
+            }
+        } catch (Exception e){
+            System.err.println("Código Inválido.");
+        }
+    }
+    
+    public void consultaHora(){
+        try{
+            String h = Console.scanString("Hora: ");
+            Date hora = DateUtil.stringToHour(h);
+            System.out.println("-----------------------------\n");
+            System.out.println(String.format("%-10s", "SEÇÃO") + "\t"
+                             + String.format("%-20s", "|FILME") + "\t"
+                             + String.format("%-10s", "|SALA") + "\t"
+                             + String.format("%-10s", "|HORÁRIO") + "\t");
+            for (Secao secao : listaSecao.getListaSecoes()){
+                if(secao.getHorario().equals(hora)){
+                    System.out.println(String.format("%-10s", secao.getNumero()) + "\t"
+                    + String.format("%-20s", "|" + secao.getFilme().getNome()) + "\t"
+                    + String.format("%-10s", "|" + secao.getSala().getNumero()) + "\t"
+                    + String.format("%-10s", "|" + DateUtil.hourToString(secao.getHorario())) + "\t");
+                }
+            }
+
+        } catch (Exception e){
+            System.err.println("Horário inválido.");
+        }
+    }
 }

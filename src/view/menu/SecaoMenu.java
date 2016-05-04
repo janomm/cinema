@@ -21,6 +21,10 @@ public class SecaoMenu {
     public static final int OP_ALTERASALA = 2;
     public static final int OP_ALTERAHORA = 3;
     
+    public static final int OP_CONSULTAFILME = 1;
+    public static final int OP_CONSULTASALA = 2;
+    public static final int OP_CONSULTAHORA = 3;
+    
     public static String getOpcoes(){
         return("\n--------------------------------------\n"
                 + "1- Incluir Seção\n"
@@ -37,6 +41,15 @@ public class SecaoMenu {
                 + "1- Altera Filme\n"
                 + "2- Altera Sala\n"
                 + "3- Altera Hora\n"
+                + "0- Voltar"
+                + "\n--------------------------------------");
+    }
+    
+    public static String getOpcoesConsulta(){
+        return("\n--------------------------------------\n"
+                + "1- Consultar Seção por Filme\n"
+                + "2- Consultar Seção por Sala\n"
+                + "3- Consultar Seção por Horário\n"
                 + "0- Voltar"
                 + "\n--------------------------------------");
     }

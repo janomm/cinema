@@ -72,4 +72,16 @@ public class RepositorioSecao {
         }
         return s;
     }
+    
+    public boolean alteraSecao(Secao secao, int numero){
+        for(Secao s : listaSecoes){
+            if(s.getNumero().equals(numero)){
+                s.setFilme(secao.getFilme());
+                s.setHorario(secao.getHorario());
+                s.setSala(secao.getSala());
+                return true;
+            }
+        }
+        return false;
+    }
 }
