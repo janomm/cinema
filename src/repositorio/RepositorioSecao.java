@@ -30,7 +30,6 @@ public class RepositorioSecao {
     public boolean addSecao(Filme filme, Sala sala, Date hora){
         Secao secao = new Secao(sala, hora, filme, retornaCodigo());
         return (listaSecoes.add(secao));
-        
     }
     
     public int retornaCodigo(){
@@ -87,6 +86,7 @@ public class RepositorioSecao {
     
     public boolean achouSecaoFilme(int codigo){
         for (Secao s : listaSecoes){
+            System.out.println(s.getFilme().getCodigo() + " - " + codigo);
             if(s.getFilme().getCodigo().equals(codigo)){
                 return true;
             }

@@ -163,17 +163,35 @@ public class SecaoUI {
         }
     }
     
-    public void listaSecaoFilme(int numero){
+    public void listaSecaoFilme(int codigo){
         System.out.println("-----------------------------\n");
         System.out.println(String.format("%-10s", "SEÇÃO") + "\t"
                          + String.format("%-20s", "|FILME") + "\t"
                          + String.format("%-10s", "|SALA") + "\t"
                          + String.format("%-10s", "|HORÁRIO") + "\t");
         for (Secao secao : listaSecao.getListaSecoes()){
-            System.out.println(String.format("%-10s", secao.getNumero()) + "\t"
-            + String.format("%-20s", "|" + secao.getFilme().getNome()) + "\t"
-            + String.format("%-10s", "|" + secao.getSala().getNumero()) + "\t"
-            + String.format("%-10s", "|" + DateUtil.hourToString(secao.getHorario())) + "\t");
+            if(secao.getFilme().getCodigo().equals(codigo)){
+                System.out.println(String.format("%-10s", secao.getNumero()) + "\t"
+                + String.format("%-20s", "|" + secao.getFilme().getNome()) + "\t"
+                + String.format("%-10s", "|" + secao.getSala().getNumero()) + "\t"
+                + String.format("%-10s", "|" + DateUtil.hourToString(secao.getHorario())) + "\t");
+            }
+        }
+    }
+    
+    public void listaSecaoSala(int numero){
+        System.out.println("-----------------------------\n");
+        System.out.println(String.format("%-10s", "SEÇÃO") + "\t"
+                         + String.format("%-20s", "|FILME") + "\t"
+                         + String.format("%-10s", "|SALA") + "\t"
+                         + String.format("%-10s", "|HORÁRIO") + "\t");
+        for (Secao secao : listaSecao.getListaSecoes()){
+            if(secao.getSala().getNumero().equals(numero)){
+                System.out.println(String.format("%-10s", secao.getNumero()) + "\t"
+                + String.format("%-20s", "|" + secao.getFilme().getNome()) + "\t"
+                + String.format("%-10s", "|" + secao.getSala().getNumero()) + "\t"
+                + String.format("%-10s", "|" + DateUtil.hourToString(secao.getHorario())) + "\t");
+            }
         }
     }
     
@@ -184,13 +202,6 @@ public class SecaoUI {
             System.out.println("Seção não cadastrada.");
         } else {
             selecionaAlteracao(numero);
-            
-            
-            /*Secao s = listaSecao.retornaSecao(numero);
-            Secao secRet = selecionaAlteracao(s);
-            if(!secRet.equals(null)){
-                listaSecao.alteraSecao(secRet, numero);
-            }*/
         }
     }
     
@@ -371,5 +382,24 @@ public class SecaoUI {
         } catch (Exception e){
             System.err.println("Horário inválido.");
         }
+    }
+    
+    public boolean achaSecao(int numero){
+        for (Secao secao : listaSecao.getListaSecoes()){
+            if(secao.getNumero().equals(numero)){
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public Secao retornaSecao(int numero){
+        for (Secao secao : listaSecao.getListaSecoes()){
+            if(secao.getNumero().equals(numero)){
+                return secao;
+            }
+        }
+        Secao s = new Secao();
+        return s;
     }
 }

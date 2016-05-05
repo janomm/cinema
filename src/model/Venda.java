@@ -10,15 +10,25 @@ package model;
  * @author Julliano
  */
 public class Venda {
+    private Integer numero;
     private Secao secao;
-    private Integer assentos;
+    private Integer quantidade;
 
     public Venda() {
     }
 
-    public Venda(Secao secao, Integer assentos) {
+    public Venda(Integer numero, Secao secao, Integer quantidade) {
+        this.numero = numero;
         this.secao = secao;
-        this.assentos = assentos;
+        this.quantidade = quantidade;        
+    }
+
+    public Integer getNumero() {
+        return numero;
+    }
+
+    public void setNumero(Integer numero) {
+        this.numero = numero;
     }
 
     public Secao getSecao() {
@@ -29,16 +39,14 @@ public class Venda {
         this.secao = secao;
     }
 
-    public Integer getAssentos() {
-        return assentos;
+    public Integer getQuantidade() {
+        return quantidade;
     }
 
-    public void setAssentos(Integer assentos) {
-        this.assentos = assentos;
+    public void setQuantidade(Integer quantidade) {
+        this.quantidade = quantidade;
     }
+
     
-    public Integer assentosRestantes(){
-        return secao.getSala().getAssentos() - assentos;
-    }
     
 }

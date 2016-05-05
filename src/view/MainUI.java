@@ -29,7 +29,13 @@ public class MainUI {
         listaSecoes = new RepositorioSecao();
         listaSalas  = new RepositorioSala();
         listaVendas = new RepositorioVenda();
-        //Filme f = new Filme(1, "Cemitério Maldito", "Terror", "Animais voltam amaldiçoados");
+        
+        
+        listaFilmes.addFilme("Cemitério Maldito", "Terror", "Animais voltam amaldiçoados");
+        listaFilmes.addFilme("Batman", "Ação", "Batman");
+        listaSalas.addSala(150);
+        listaSalas.addSala(130);
+        
     }
     
     public void executar() {
