@@ -10,25 +10,15 @@ package model;
  * @author Julliano
  */
 public class Venda {
-    private Integer numero;
     private Secao secao;
     private Integer quantidade;
 
     public Venda() {
     }
 
-    public Venda(Integer numero, Secao secao, Integer quantidade) {
-        this.numero = numero;
+    public Venda(Secao secao, Integer quantidade) {
         this.secao = secao;
         this.quantidade = quantidade;        
-    }
-
-    public Integer getNumero() {
-        return numero;
-    }
-
-    public void setNumero(Integer numero) {
-        this.numero = numero;
     }
 
     public Secao getSecao() {

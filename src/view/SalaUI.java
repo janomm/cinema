@@ -45,7 +45,7 @@ public class SalaUI {
                     System.out.println("Retornando ao menu principal..");
                     break;
                 default:
-                    System.out.println("Opção inválida..");
+                    System.err.println("Opção inválida..");
             }
         } while (opcao != SalaMenu.OP_VOLTAR);
     }
@@ -57,27 +57,31 @@ public class SalaUI {
                 if(lista.addSala(assentos)){
                     System.out.println("Sala cadastrada.");
                 } else {
-                    System.out.println("Sala não cadastrada.");
+                    System.err.println("Sala não cadastrada.");
                 }
             } else {
-                System.out.println("Quantidade de assentos inválida.");
+                System.err.println("Quantidade de assentos inválida.");
             }
         } catch (Exception e){
-            System.out.println("Quantidade de assentos inválida.");
+            System.err.println("Quantidade Inválida.");
         }
     }
     
     public void removeSala(){
         listaSala();
-        Integer numero = Console.scanInt("Número: ");
-        if(!lista.salaExiste(numero)){
-            System.out.println("Sala não Cadastrada.");
-        } else {
-            if(!lista.deletaSala(numero)){
-                System.out.println("Sala não Removida.");
+        try{
+            Integer numero = Console.scanInt("Número: ");
+            if(!lista.salaExiste(numero)){
+                System.err.println("Sala não Cadastrada.");
             } else {
-                System.out.println("Sala Removida.");
+                if(!lista.deletaSala(numero)){
+                    System.err.println("Sala não Removida.");
+                } else {
+                    System.out.println("Sala Removida.");
+                }
             }
+        } catch(Exception ex){
+            System.err.println("Quantidade Inválida.");
         }
     }
     
@@ -105,30 +109,38 @@ public class SalaUI {
     
     public void editaSala(){
         listaSala();
-        int numero = Console.scanInt("Numero: ");
-        if(!lista.salaExiste(numero)){
-            System.out.println("Sala não Cadastrada.");
-        } else {
-            Sala s = lista.retornaSala(numero);
-            int assentos = Console.scanInt("Assentos: ");
-            if(assentos > 0){
-                if(lista.alteraAssentos(s, assentos)){
-                    System.out.println("Assentos Alterado.");
-                } else {
-                    System.out.println("Alteração não Realizada.");
-                }
+        try{
+            int numero = Console.scanInt("Numero: ");
+            if(!lista.salaExiste(numero)){
+                System.err.println("Sala não Cadastrada.");
             } else {
-                System.out.println("Quantidade de assentos inválida. Alteração não Realizada.");
+                Sala s = lista.retornaSala(numero);
+                int assentos = Console.scanInt("Assentos: ");
+                if(assentos > 0){
+                    if(lista.alteraAssentos(s, assentos)){
+                        System.out.println("Assentos Alterado.");
+                    } else {
+                        System.err.println("Alteração não Realizada.");
+                    }
+                } else {
+                    System.err.println("Quantidade de assentos inválida. Alteração não Realizada.");
+                }
             }
+        } catch (Exception e){
+            System.err.println("Número inválido.");
         }
     }
     
     public void consultaSala(){
-        Integer numero = Console.scanInt("Número: ");
-        if(!lista.salaExiste(numero)){
-            System.out.println("Sala não Cadastrada.");
-        } else {
-            listaSala(numero);
+        try{
+            Integer numero = Console.scanInt("Número: ");
+            if(!lista.salaExiste(numero)){
+                System.err.println("Sala não Cadastrada.");
+            } else {
+                listaSala(numero);
+            }
+        } catch (Exception e){
+            System.err.println("Número inválido.");
         }
     }
     

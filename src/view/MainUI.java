@@ -30,7 +30,6 @@ public class MainUI {
         listaSalas  = new RepositorioSala();
         listaVendas = new RepositorioVenda();
         
-        
         listaFilmes.addFilme("Cemitério Maldito", "Terror", "Animais voltam amaldiçoados");
         listaFilmes.addFilme("Batman", "Ação", "Batman");
         listaSalas.addSala(150);
@@ -63,7 +62,7 @@ public class MainUI {
                     System.out.println("Aplicação finalizada!!!");
                     break;
                 default:
-                    System.out.println("Opção inválida..");
+                    System.err.println("Opção inválida..");
 
             }
         } while (opcao != MainMenu.OP_SAIR);

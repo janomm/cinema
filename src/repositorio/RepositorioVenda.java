@@ -5,6 +5,7 @@
  */
 package repositorio;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.text.StyledEditorKit;
 import model.Secao;
@@ -18,28 +19,38 @@ public class RepositorioVenda {
     private List<Venda> listaVendas;
 
     public RepositorioVenda() {
-        this.listaVendas = listaVendas;
+        listaVendas = new ArrayList<>();
     }
-
+    
     public List<Venda> getListaVendas() {
         return listaVendas;
     }
-    
-    public boolean adicionaVenda(Secao secao, Integer quantidade){
-        Venda v = new Venda(retornaNumero(), secao, quantidade);
-        return listaVendas.add(v);
+
+    public boolean addVenda(Secao secao, Integer quantidade){
+        Venda v = new Venda(secao, quantidade);
+        return (listaVendas.add(v));
     }
     
-    public int retornaNumero(){
-        int numero = 0;
-        for (Venda venda : listaVendas){
-            if(venda.getNumero() > numero){
-                numero = venda.getNumero();
+    public boolean alteraVenda(Secao secao, Integer q){
+        for (Venda v : listaVendas){
+            if(v.getSecao().equals(secao)){
+                v.setQuantidade(v.getQuantidade() + q);
+                return true;
             }
         }
-        numero++;
-        return numero;
+        return false;
     }
+    
+    public boolean existeVenda(Integer numero){
+        for (Venda v : listaVendas){
+            if(v.getSecao().getNumero().equals(numero)){
+                return true;
+            }
+        }
+        return false;
+    }
+    
+
     
     
     

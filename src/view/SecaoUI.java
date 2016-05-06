@@ -68,7 +68,7 @@ public class SecaoUI {
                     System.out.println("Retornando ao menu principal..");
                     break;
                 default:
-                    System.out.println("Opção inválida..");
+                    System.err.println("Opção inválida..");
             }
         } while (opcao != SecaoMenu.OP_VOLTAR);
     }
@@ -81,11 +81,11 @@ public class SecaoUI {
         SalaUI salaUI = new SalaUI(listaSalas);
         
         if(listaSalas.quantidadeSala().equals(0)){
-            System.out.println("Salas não cadastradas.");
+            System.err.println("Salas não cadastradas.");
             return false;
         }
         if(listaFilmes.quantidadeFilmes().equals(0)){
-            System.out.println("Salas não cadastradas.");
+            System.err.println("Salas não cadastradas.");
             return false;
         }
         try{
@@ -93,11 +93,11 @@ public class SecaoUI {
             int codigo = Console.scanInt("Selecione o código do filme: ");
             filme = new FilmeUI(listaFilmes).buscaFilme(codigo);
             if (filme.equals(null)){
-                System.out.println("Código do Filme não cadastrado.");
+                System.err.println("Código do Filme não cadastrado.");
                 return false;
             }
         } catch (Exception ex){
-            System.out.println("Código inválido.");
+            System.err.println("Código inválido.");
             return false;
         }
         try{
@@ -105,25 +105,25 @@ public class SecaoUI {
             int numero = Console.scanInt("Selecione o número da sala: ");
             sala = new SalaUI(listaSalas).buscaSala(numero);
             if(sala.equals(null)){
-                System.out.println("Número da sala não cadastrado.");
+                System.err.println("Número da sala não cadastrado.");
                 return false;
             }
         } catch(Exception ex){
-            System.out.println("Número inválido.");
+            System.err.println("Número inválido.");
             return false;
         }
         try{
             String h = Console.scanString("Digite a Hora: ");
             hora = DateUtil.stringToHour(h);
         } catch (Exception ex){
-            System.out.println("Hora Inválida.");
+            System.err.println("Hora Inválida.");
             return false;
         }
         if(listaSecao.addSecao(filme, sala, hora)){
             System.out.println("Seção inserida.");
             return true;
         } else{
-            System.out.println("Seção não inserida.");
+            System.err.println("Seção não inserida.");
             return false;
         }
     }
@@ -131,22 +131,26 @@ public class SecaoUI {
     
     public boolean removeSecao(){
         if (listaSecao.equals(null)) {
-            System.out.println("Nenhuma seção cadastrada.");
+            System.err.println("Nenhuma seção cadastrada.");
             return false;
         }
         listaSecao();
-        Integer numero = Console.scanInt("Número: ");
-        if(!listaSecao.secaoExiste(numero)){
-            System.out.println("Seção não cadastrada.");
-        } else {
-            if(!listaSecao.deletaSecao(numero)){
-                System.out.println("Seção não Removida.");
+        try{
+            Integer numero = Console.scanInt("Número: ");
+            if(!listaSecao.secaoExiste(numero)){
+                System.err.println("Seção não cadastrada.");
             } else {
-                System.out.println("Seção Removida.");
+                if(!listaSecao.deletaSecao(numero)){
+                    System.err.println("Seção não Removida.");
+                } else {
+                    System.out.println("Seção Removida.");
+                }
             }
+            return true;
+        } catch (Exception e){
+            System.out.println("Número inválido.");
+            return false;
         }
-        
-        return true;
     }
     
     public void listaSecao(){
@@ -197,11 +201,15 @@ public class SecaoUI {
     
     public void editaSecao(){
         listaSecao();
-        int numero = Console.scanInt("Código: ");
-        if(!listaSecao.secaoExiste(numero)){
-            System.out.println("Seção não cadastrada.");
-        } else {
-            selecionaAlteracao(numero);
+        try{
+            int numero = Console.scanInt("Código: ");
+            if(!listaSecao.secaoExiste(numero)){
+                System.err.println("Seção não cadastrada.");
+            } else {
+                selecionaAlteracao(numero);
+            }
+        } catch (Exception ex){
+            System.err.println("Número inválido.");
         }
     }
     
@@ -239,7 +247,7 @@ public class SecaoUI {
                     System.out.println("Retornando ao menu principal..");
                     break;
                 default:
-                    System.out.println("Opção inválida..");
+                    System.err.println("Opção inválida..");
             }
         } while (opcao != SecaoMenu.OP_VOLTAR);
     }
@@ -292,7 +300,7 @@ public class SecaoUI {
             }
             return false;
         } catch (Exception ex){
-            System.out.println("Hora Inválida.");
+            System.err.println("Hora Inválida.");
             return false;
         }
     }
@@ -316,7 +324,7 @@ public class SecaoUI {
                     System.out.println("Retornando ao menu principal..");
                     break;
                 default:
-                    System.out.println("Opção inválida..");
+                    System.err.println("Opção inválida..");
             }
         } while (opcao != SecaoMenu.OP_VOLTAR);
     }

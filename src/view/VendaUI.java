@@ -12,6 +12,7 @@ import repositorio.RepositorioSala;
 import repositorio.RepositorioSecao;
 import repositorio.RepositorioVenda;
 import util.Console;
+import util.DateUtil;
 import view.menu.VendaMenu;
 
 /**
@@ -54,101 +55,111 @@ public class VendaUI {
             opcao = Console.scanInt("Digite sua opção:");
             switch (opcao) {
                 case VendaMenu.OP_VENDA:
-                    iniciaVenda();
-                    break;
-                case VendaMenu.OP_VOLTAR:
-                    System.out.println("Retornando ao menu principal..");
-                    break;
-                default:
-                    System.out.println("Opção inválida..");
-            }
-        } while (opcao != VendaMenu.OP_VOLTAR);
-    }
-    
-    public void iniciaVenda(){
-        int opcao = 0;
-        do {
-            System.out.println(VendaMenu.getOpcoesVenda());
-            opcao = Console.scanInt("Digite sua opção:");
-            switch (opcao) {
-                case VendaMenu.OP_VENDASECAO:
                     vendaSecao();
                     break;
-                case VendaMenu.OP_VENDAFILME:
-                    vendaFilme();
+                case VendaMenu.OP_LISTAVENDA:
+                    listaVenda();
                     break;
                 case VendaMenu.OP_VOLTAR:
                     System.out.println("Retornando ao menu principal..");
                     break;
                 default:
-                    System.out.println("Opção inválida..");
+                    System.err.println("Opção inválida..");
             }
         } while (opcao != VendaMenu.OP_VOLTAR);
     }
     
     public boolean vendaSecao(){
         try{
-            new SecaoUI(listaSecoes, listaSalas, listaFilmes).listaSecao();
+            listaSecaoAssentos();
             int numero = Console.scanInt("Numero da Seção:");
-            Secao secao = new SecaoUI(listaSecoes, listaSalas, listaFilmes).retornaSecao(numero);
-            if(new SecaoUI(listaSecoes, listaSalas, listaFilmes).achaSecao(numero)){
-                Integer quant = controleVenda(new SecaoUI(listaSecoes, listaSalas, listaFilmes).retornaSecao(numero));
-                if(quant > 0){
-                    try {
-                        int qVenda = Console.scanInt("Quantidade de ingressos: ");
-                        if(qVenda > quant){
-                            System.out.println("Quantiade de ingressos maior que a disponível.");
-                            return false;
-                        } else {
-                            listaVendas.adicionaVenda(secao, quant);
-                            return true;
-                        }
-                    } catch (Exception e) {
-                        System.out.println("Quantidade digitada inválida.");
-                        return false;
-                    }
-                } else {
-                    System.out.println("Seção esgotada.");
+            if(!listaSecoes.secaoExiste(numero)){
+                System.err.println("Seção Inválida.");
+                return false;
+            }
+            
+            int ingDisp = ingressosDisponiveis(numero);
+            if(ingDisp == 0){
+                System.err.println("Seção esgotada.");
+                return false;
+            }
+
+            int ingVenda = Console.scanInt("Quantidade: ");
+            if(ingVenda > ingDisp){
+                System.err.println("Quantidade informada maior que a disponível.");
+                return false;
+            }
+            
+            if(listaVendas.existeVenda(numero)){
+                if(listaVendas.alteraVenda(listaSecoes.retornaSecao(numero), ingVenda)){
+                    System.out.println("Venda Efetivada.");
+                    return true;
+                } else{
+                    System.err.println("Venda não Efetivada.");
                     return false;
                 }
             } else {
-                System.out.println("Seção inválida.");
-                return false;
+                if(listaVendas.addVenda(listaSecoes.retornaSecao(numero), ingVenda)){
+                    System.out.println("Venda Efetivada.");
+                    return true;
+                } else{
+                    System.err.println("Venda não Efetivada.");
+                    return false;
+                }
             }
-            
         } catch (Exception e){
+            System.err.println("Valor inválido.");
             return false;
         }
     }
     
-    
-    public Integer controleVenda(Secao secao){
-        Integer q = secao.getSala().getAssentos();
-        for(Venda v : listaVendas.getListaVendas()){
-            if(v.getSecao().equals(secao)){
-                q = q - v.getQuantidade();
+    public Integer ingressosDisponiveis(Integer numero){
+        Integer aDisp = 0;
+        for (Secao secao : listaSecoes.getListaSecoes()){
+            if(secao.getNumero().equals(numero)){
+                aDisp = secao.getSala().getAssentos();
+                break;
             }
         }
-        return q;
+        
+        for (Venda v : listaVendas.getListaVendas()){
+            if(v.getSecao().getNumero().equals(numero)){
+                aDisp = aDisp - v.getQuantidade();
+                break;
+            }
+        }
+        return aDisp;
     }
     
-    public boolean vendaFilme(){
-        try{
-            new FilmeUI(listaFilmes).listaFilmes();
-            int codigo = Console.scanInt("Código do filme: ");
-            if(listaSecoes.achouSecaoFilme(codigo)){
-                new SecaoUI(listaSecoes, listaSalas, listaFilmes).listaSecaoFilme(codigo);
-                
-                return true;
-                
-            } else{
-                System.out.println("Filme não encontrado");
-                return false;
-            }
-            
-        } catch(Exception e){
-            System.err.println("Código inválido.");
-            return false;
+    public void listaVenda(){
+        System.out.println("-----------------------------\n");
+        System.out.println(String.format("%-10s", "SEÇÃO") + "\t"
+                         + String.format("%-20s", "|FILME") + "\t"
+                         + String.format("%-10s", "|SALA") + "\t"
+                         + String.format("%-10s", "|HORÁRIO") + "\t"
+                         + String.format("%-10s", "|VENDIDOS") + "\t");
+        for (Venda venda : listaVendas.getListaVendas()){
+            System.out.println(String.format("%-10s", venda.getSecao().getNumero()) + "\t"
+            + String.format("%-20s", "|" + venda.getSecao().getFilme().getNome()) + "\t"
+            + String.format("%-10s", "|" + venda.getSecao().getSala().getNumero()) + "\t"
+            + String.format("%-10s", "|" + DateUtil.hourToString(venda.getSecao().getHorario())) + "\t"
+            + String.format("%-10s", "|" + venda.getQuantidade()) + "\t");
+        }
+    }
+    
+    public void listaSecaoAssentos(){
+        System.out.println("-----------------------------\n");
+        System.out.println(String.format("%-10s", "SEÇÃO") + "\t"
+                         + String.format("%-20s", "|FILME") + "\t"
+                         + String.format("%-10s", "|SALA") + "\t"
+                         + String.format("%-10s", "|HORÁRIO") + "\t"
+                         + String.format("%-10s", "|DISPONÍVEL") + "\t");
+        for (Secao secao : listaSecoes.getListaSecoes()){
+            System.out.println(String.format("%-10s", secao.getNumero()) + "\t"
+            + String.format("%-20s", "|" + secao.getFilme().getNome()) + "\t"
+            + String.format("%-10s", "|" + secao.getSala().getNumero()) + "\t"
+            + String.format("%-10s", "|" + DateUtil.hourToString(secao.getHorario())) + "\t"
+            + String.format("%-10s", "|" + ingressosDisponiveis(secao.getNumero())) + "\t");
         }
     }
 }
