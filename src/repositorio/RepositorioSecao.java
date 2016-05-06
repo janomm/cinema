@@ -27,11 +27,22 @@ public class RepositorioSecao {
         return listaSecoes;
     }
     
+    /**
+     * Adiciona uma Seção
+     * @param filme
+     * @param sala
+     * @param hora
+     * @return 
+     */
     public boolean addSecao(Filme filme, Sala sala, Date hora){
         Secao secao = new Secao(sala, hora, filme, retornaCodigo());
         return (listaSecoes.add(secao));
     }
     
+    /**
+     * Função de controle que retorna o código da próxima seção no arrayLyst
+     * @return 
+     */
     public int retornaCodigo(){
         int numero = 0;
         for (Secao secao : listaSecoes){
@@ -43,6 +54,11 @@ public class RepositorioSecao {
         return numero;
     }
     
+    /**
+     * Retorna se exuste uma seção do com numero informado
+     * @param numero
+     * @return 
+     */
     public boolean secaoExiste(Integer numero){
         for (Secao secao : listaSecoes){
             if(secao.getNumero().equals(numero))
@@ -51,6 +67,11 @@ public class RepositorioSecao {
         return false;
     }
     
+    /**
+     * Exclui a seção
+     * @param numero
+     * @return 
+     */
     public boolean deletaSecao(Integer numero){
         for (Secao secao : listaSecoes){
             if (secao.getNumero().equals(numero)){
@@ -61,6 +82,11 @@ public class RepositorioSecao {
         return false;
     }
     
+    /**
+     * Retorna a seção igual ao código informado
+     * @param numero
+     * @return 
+     */
     public Secao retornaSecao(int numero){
         Secao s = new Secao();
         for (Secao secao : listaSecoes){
@@ -72,6 +98,12 @@ public class RepositorioSecao {
         return s;
     }
     
+    /**
+     * Altera a seção
+     * @param secao
+     * @param numero
+     * @return 
+     */
     public boolean alteraSecao(Secao secao, int numero){
         for(Secao s : listaSecoes){
             if(s.getNumero().equals(numero)){
@@ -84,9 +116,13 @@ public class RepositorioSecao {
         return false;
     }
     
+    /**
+     * Retorna se existe uma seção com o filme informado
+     * @param codigo
+     * @return 
+     */
     public boolean achouSecaoFilme(int codigo){
         for (Secao s : listaSecoes){
-            System.out.println(s.getFilme().getCodigo() + " - " + codigo);
             if(s.getFilme().getCodigo().equals(codigo)){
                 return true;
             }
@@ -94,6 +130,11 @@ public class RepositorioSecao {
         return false;
     }
     
+    /**
+     * Retorna se existe uma seção com a sala informada
+     * @param numero
+     * @return 
+     */
     public boolean achouSecaoSala(int numero){
         for (Secao s : listaSecoes){
             if(s.getSala().getNumero().equals(numero)){
@@ -103,6 +144,11 @@ public class RepositorioSecao {
         return false;
     }
     
+    /**
+     * Retorna se existe uma seção com a hora informada
+     * @param horario
+     * @return 
+     */
     public boolean achouSecaoHora(Date horario){
         for (Secao s : listaSecoes){
             if(s.getHorario().equals(horario)){
