@@ -23,29 +23,35 @@ public class SalaUI {
     public void executar(){
         int opcao = 0;
         do {
-            System.out.println(SalaMenu.getOpcoes());
-            opcao = Console.scanInt("Digite sua opção:");
-            switch (opcao) {
-                case SalaMenu.OP_NOVO:
-                    insereSala();
-                    break;
-                case SalaMenu.OP_REMOVER:
-                    removeSala();
-                    break;
-                case SalaMenu.OP_EDITAR:
-                    editaSala();
-                    break;
-                case SalaMenu.OP_LISTAR:
-                    listaSala();
-                    break;
-                case SalaMenu.OP_CONSULTAR:
-                    consultaSala();
-                    break;
-                case SalaMenu.OP_VOLTAR:
-                    System.out.println("Retornando ao menu principal..");
-                    break;
-                default:
-                    System.err.println("Opção inválida..");
+            try{
+                System.out.println(SalaMenu.getOpcoes());
+                opcao = Console.scanInt("Digite sua opção:");
+                switch (opcao) {
+                    case SalaMenu.OP_NOVO:
+                        insereSala();
+                        break;
+                    case SalaMenu.OP_REMOVER:
+                        removeSala();
+                        break;
+                    case SalaMenu.OP_EDITAR:
+                        editaSala();
+                        break;
+                    case SalaMenu.OP_LISTAR:
+                        listaSala();
+                        break;
+                    case SalaMenu.OP_CONSULTAR:
+                        consultaSala();
+                        break;
+                    case SalaMenu.OP_VOLTAR:
+                        System.out.println("Retornando ao menu principal..");
+                        break;
+                    default:
+                        System.err.println("Opção inválida..");
+                }
+            }
+            catch(Exception ex){
+                System.err.println("Opção inválida.");
+                opcao= -1;
             }
         } while (opcao != SalaMenu.OP_VOLTAR);
     }

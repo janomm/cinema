@@ -23,29 +23,35 @@ public class FilmeUI {
     public void executar(){
         int opcao = 0;
         do {
-            System.out.println(FilmeMenu.getOpcoes());
-            opcao = Console.scanInt("Digite sua opção:");
-            switch (opcao) {
-                case FilmeMenu.OP_NOVO:
-                    insereFilme();
-                    break;
-                case FilmeMenu.OP_REMOVER:
-                    removeFilme();
-                    break;
-                case FilmeMenu.OP_EDITAR:
-                    editaFilme();
-                    break;
-                case FilmeMenu.OP_LISTAR:
-                    listaFilmes();
-                    break;
-                case FilmeMenu.OP_CONSULTAR:
-                    consultaFilme();
-                    break;
-                case FilmeMenu.OP_VOLTAR:
-                    System.out.println("Retornando ao menu principal..");
-                    break;
-                default:
-                    System.err.println("Opção inválida..");
+            try{
+                System.out.println(FilmeMenu.getOpcoes());
+                opcao = Console.scanInt("Digite sua opção:");
+                switch (opcao) {
+                    case FilmeMenu.OP_NOVO:
+                        insereFilme();
+                        break;
+                    case FilmeMenu.OP_REMOVER:
+                        removeFilme();
+                        break;
+                    case FilmeMenu.OP_EDITAR:
+                        editaFilme();
+                        break;
+                    case FilmeMenu.OP_LISTAR:
+                        listaFilmes();
+                        break;
+                    case FilmeMenu.OP_CONSULTAR:
+                        consultaFilme();
+                        break;
+                    case FilmeMenu.OP_VOLTAR:
+                        System.out.println("Retornando ao menu principal..");
+                        break;
+                    default:
+                        System.err.println("Opção inválida.");
+                }
+            }
+            catch(Exception ex){
+                System.err.println("Opção inválida.");
+                opcao= -1;
             }
         } while (opcao != FilmeMenu.OP_VOLTAR);
     }

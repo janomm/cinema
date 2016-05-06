@@ -51,20 +51,30 @@ public class VendaUI {
     public void executar(){
         int opcao = 0;
         do {
-            System.out.println(VendaMenu.getOpcoes());
-            opcao = Console.scanInt("Digite sua opção:");
-            switch (opcao) {
-                case VendaMenu.OP_VENDA:
-                    vendaSecao();
-                    break;
-                case VendaMenu.OP_LISTAVENDA:
-                    listaVenda();
-                    break;
-                case VendaMenu.OP_VOLTAR:
-                    System.out.println("Retornando ao menu principal..");
-                    break;
-                default:
-                    System.err.println("Opção inválida..");
+            try{
+                try{
+                    System.out.println(VendaMenu.getOpcoes());
+                    opcao = Console.scanInt("Digite sua opção:");
+                    switch (opcao) {
+                        case VendaMenu.OP_VENDA:
+                            vendaSecao();
+                            break;
+                        case VendaMenu.OP_LISTAVENDA:
+                            listaVenda();
+                            break;
+                        case VendaMenu.OP_VOLTAR:
+                            System.out.println("Retornando ao menu principal..");
+                            break;
+                        default:
+                            System.err.println("Opção inválida..");
+                    }
+                }catch(Exception ex){
+                    System.err.println("Opção inválida.");
+                    opcao= -1;
+                }
+            }
+            catch(Exception ex){
+                System.err.println("Opção inválida.");        
             }
         } while (opcao != VendaMenu.OP_VOLTAR);
     }

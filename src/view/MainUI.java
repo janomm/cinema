@@ -40,30 +40,36 @@ public class MainUI {
     public void executar() {
         int opcao = 0;
         do {
-            System.out.println(MainMenu.getOpcoes());
-            opcao = Console.scanInt("Digite sua opção:");
-            switch (opcao) {
-                case MainMenu.OP_FILME:
-                    new FilmeUI(listaFilmes).executar();
-                    break;
-                case MainMenu.OP_SALA:
-                    new SalaUI(listaSalas).executar();
-                    break;
-                case MainMenu.OP_SECAO:
-                    new SecaoUI(listaSecoes,listaSalas,listaFilmes).executar();
-                    break;
-                case MainMenu.OP_VENDA:
-                    new VendaUI(listaVendas,listaSecoes,listaSalas,listaFilmes).executar();
-                    break;
-                case MainMenu.OP_RELATORIOS:
-                    //new ConsultaUI(listaPacientes,listaMedicamentos,listaConsultas).executar();
-                    break;
-                case MainMenu.OP_SAIR:
-                    System.out.println("Aplicação finalizada!!!");
-                    break;
-                default:
-                    System.err.println("Opção inválida..");
+            try{
+                System.out.println(MainMenu.getOpcoes());
+                opcao = Console.scanInt("Digite sua opção:");
+                switch (opcao) {
+                    case MainMenu.OP_FILME:
+                        new FilmeUI(listaFilmes).executar();
+                        break;
+                    case MainMenu.OP_SALA:
+                        new SalaUI(listaSalas).executar();
+                        break;
+                    case MainMenu.OP_SECAO:
+                        new SecaoUI(listaSecoes,listaSalas,listaFilmes).executar();
+                        break;
+                    case MainMenu.OP_VENDA:
+                        new VendaUI(listaVendas,listaSecoes,listaSalas,listaFilmes).executar();
+                        break;
+                    case MainMenu.OP_RELATORIOS:
+                        new RelatoriosUI(listaVendas,listaSecoes,listaSalas,listaFilmes).executar();
+                        break;
+                    case MainMenu.OP_SAIR:
+                        System.out.println("Aplicação finalizada!!!");
+                        break;
+                    default:
+                        System.err.println("Opção inválida..");
 
+                }
+            }
+            catch(Exception ex){
+                System.err.println("Opção inválida.");
+                opcao= -1;
             }
         } while (opcao != MainMenu.OP_SAIR);
     }
