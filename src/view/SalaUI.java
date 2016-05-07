@@ -56,6 +56,9 @@ public class SalaUI {
         } while (opcao != SalaMenu.OP_VOLTAR);
     }
     
+    /**
+     * Interface que executa a inserção de uma sala
+     */
     public void insereSala(){
         try{
             int assentos = Console.scanInt("Assentos: ");
@@ -73,6 +76,9 @@ public class SalaUI {
         }
     }
     
+    /**
+     * Interface que executa a remoção de uma sala
+     */
     public void removeSala(){
         listaSala();
         try{
@@ -91,6 +97,9 @@ public class SalaUI {
         }
     }
     
+    /**
+     * Interface que lista todas ass salas
+     */
     public void listaSala(){
         System.out.println("-----------------------------\n");
         System.out.println(String.format("%-10s", "NÚMERO") + "\t"
@@ -101,6 +110,10 @@ public class SalaUI {
         }
     }
     
+    /**
+     * Interface que lista a sala por numero
+     * @param numero 
+     */
     public void listaSala(Integer numero){
         System.out.println("-----------------------------\n");
         System.out.println(String.format("%-10s", "NÚMERO") + "\t"
@@ -113,6 +126,9 @@ public class SalaUI {
         }
     }
     
+    /**
+     * Interface que executa a edição de uma sala
+     */
     public void editaSala(){
         listaSala();
         try{
@@ -137,6 +153,9 @@ public class SalaUI {
         }
     }
     
+    /**
+     * Interface que consulta e lista a sala informada
+     */
     public void consultaSala(){
         try{
             Integer numero = Console.scanInt("Número: ");
@@ -150,10 +169,19 @@ public class SalaUI {
         }
     }
     
+    /**
+     * Método que retorna se existe pelo menos uma sala cadastrada no arraylist
+     * @return 
+     */
     public boolean existeSala(){
         return (!lista.equals(null));
     }
     
+    /**
+     * Método que retorna o objeto da sala com o código igual ao informado
+     * @param numero
+     * @return 
+     */
     public Sala buscaSala(int numero){
         for (Sala sala : lista.getListaSalas()){
             if(sala.getNumero().equals(numero)){

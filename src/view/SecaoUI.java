@@ -79,6 +79,10 @@ public class SecaoUI {
         } while (opcao != SecaoMenu.OP_VOLTAR);
     }
     
+    /**
+     * Interface que executa a inserção de uma seção
+     * @return 
+     */
     public boolean insereSecao(){
         Filme filme;
         Sala sala;
@@ -135,6 +139,10 @@ public class SecaoUI {
     }
     
     
+    /**
+     * Interface que executa a exclusão de uma seção
+     * @return 
+     */
     public boolean removeSecao(){
         if (listaSecao.equals(null)) {
             System.err.println("Nenhuma seção cadastrada.");
@@ -159,6 +167,9 @@ public class SecaoUI {
         }
     }
     
+    /**
+     * Interface que lista todas as seções cadastradas
+     */
     public void listaSecao(){
         System.out.println("-----------------------------\n");
         System.out.println(String.format("%-10s", "SEÇÃO") + "\t"
@@ -173,6 +184,10 @@ public class SecaoUI {
         }
     }
     
+    /**
+     * Interface que exibe toda a seção com o código ingual ao informado
+     * @param codigo 
+     */
     public void listaSecaoFilme(int codigo){
         System.out.println("-----------------------------\n");
         System.out.println(String.format("%-10s", "SEÇÃO") + "\t"
@@ -189,6 +204,10 @@ public class SecaoUI {
         }
     }
     
+    /**
+     * Interface que lista as seções que contenham a sala informada
+     * @param numero 
+     */
     public void listaSecaoSala(int numero){
         System.out.println("-----------------------------\n");
         System.out.println(String.format("%-10s", "SEÇÃO") + "\t"
@@ -205,6 +224,9 @@ public class SecaoUI {
         }
     }
     
+    /**
+     * Interface que executa a edição da seção
+     */
     public void editaSecao(){
         listaSecao();
         try{
@@ -219,6 +241,11 @@ public class SecaoUI {
         }
     }
     
+    /**
+     * Método que retorna se existe pelo menos uma seção cadastrada
+     * @param numero
+     * @return 
+     */
     public boolean secaoExiste(Integer numero){
         for (Secao secao : listaSecao.getListaSecoes()){
             if (secao.getNumero().equals(numero)){
@@ -263,6 +290,11 @@ public class SecaoUI {
         } while (opcao != SecaoMenu.OP_VOLTAR);
     }
     
+    /**
+     * Interface que executa a alteração do filme de uma seção
+     * @param numero
+     * @return 
+     */
     public boolean alteraFilme(int numero){
         try{
             new FilmeUI(listaFilmes).listaFilmes();
@@ -281,6 +313,11 @@ public class SecaoUI {
         }
     }
     
+    /***
+     * Interface que executa a alteração da sala de uma seção
+     * @param numero
+     * @return 
+     */
     public boolean alteraSala(int numero){
         try{
             new SalaUI(listaSalas).listaSala();
@@ -299,6 +336,11 @@ public class SecaoUI {
         }
     }
     
+    /**
+     * Interface que executa a alteração da hora de uma seção
+     * @param numero
+     * @return 
+     */
     public boolean alteraHora(int numero){
         try{
             String hr = Console.scanString("Digite a Hora: ");
@@ -346,6 +388,9 @@ public class SecaoUI {
         } while (opcao != SecaoMenu.OP_VOLTAR);
     }
     
+    /**
+     * Interface que lista todas as seções com o filme informado
+     */
     public void consultaFilme(){
         try{
             int codigo = Console.scanInt("Codigo do Filme: ");
@@ -366,6 +411,9 @@ public class SecaoUI {
         }
     }
     
+    /**
+     * Interface que consulta todas as seções com a sala informada
+     */
     public void consultaSala(){
         try{
             int numero = Console.scanInt("Número da Sala: ");
@@ -386,6 +434,9 @@ public class SecaoUI {
         }
     }
     
+    /**
+     * Interface que consulta todas as seções com a hora informada
+     */
     public void consultaHora(){
         try{
             String h = Console.scanString("Hora: ");
@@ -409,6 +460,11 @@ public class SecaoUI {
         }
     }
     
+    /**
+     * Método que retorna se existe pelo menos uma seção cadastrada
+     * @param numero
+     * @return 
+     */
     public boolean achaSecao(int numero){
         for (Secao secao : listaSecao.getListaSecoes()){
             if(secao.getNumero().equals(numero)){
@@ -418,6 +474,11 @@ public class SecaoUI {
         return false;
     }
     
+    /**
+     * Interface que retorna o objeto da seção com o código igual ao informado
+     * @param numero
+     * @return 
+     */
     public Secao retornaSecao(int numero){
         for (Secao secao : listaSecao.getListaSecoes()){
             if(secao.getNumero().equals(numero)){
@@ -428,6 +489,10 @@ public class SecaoUI {
         return s;
     }
     
+    /**
+     * Interface que lista o relatório do filme por seção
+     * @return 
+     */
     public boolean relatorioFilmeSecoes(){
         try {
             FilmeUI filmeUi = new FilmeUI(listaFilmes);
@@ -450,6 +515,10 @@ public class SecaoUI {
         }
     }
     
+    /**
+     * Interface que lista os filmes de uma seção
+     * @param filme 
+     */
     public void listaFilmeSecoes(Filme filme){
         System.out.println(String.format("%-10s", "SEÇÃO") + "\t"
                             + String.format("%-20s", "|FILME") + "\t"
@@ -465,6 +534,11 @@ public class SecaoUI {
         }
     }
     
+    /**
+     * Interface que lista a quantidade de de seções com a sala informada
+     * @param sala
+     * @return 
+     */
     public Integer quantidadeSala(Sala sala){
         int q = 0;
         for (Secao secao : listaSecao.getListaSecoes()){

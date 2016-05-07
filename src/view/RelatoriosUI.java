@@ -87,6 +87,10 @@ public class RelatoriosUI {
         } while (opcao != RelatorioMenu.OP_VOLTAR);
     }
     
+    /**
+     * Interface que lista o relatório de vendas para um filme
+     * @return 
+     */
     public boolean relatorioVendaFilme(){
         try {
             FilmeUI f = new FilmeUI(listaFilmes);
@@ -108,6 +112,10 @@ public class RelatoriosUI {
         }
     }
     
+    /**
+     * Lista todas as vendas de ingressos por filme
+     * @param filme 
+     */
     public void listaVendaFilme(Filme filme){
         Integer q = 0;
         for (Venda venda : listaVendas.getListaVendas()){
@@ -124,6 +132,10 @@ public class RelatoriosUI {
         }
     }
     
+    /**
+     * Interface que lista o relatório de vendas por horário de seção
+     * @return 
+     */
     public boolean relatorioVendaHorario(){
         try{
             String h = Console.scanString("Digite a Hora: ");
@@ -137,6 +149,10 @@ public class RelatoriosUI {
         
     }
     
+    /**
+     * Lista todas as vendas para a hora informada
+     * @param hora 
+     */
     public void listaVendaHorario(Date hora){
         System.out.println("-----------------------------\n");
         System.out.println(String.format("%-10s", "HORÁRIO") + "\t"
@@ -155,6 +171,10 @@ public class RelatoriosUI {
         }
     }
     
+    /**
+     * Interface que lista o relatório de vendas por sala
+     * @return 
+     */
     public boolean relatorioVendaSala(){
         try {
             SalaUI salaUi = new SalaUI(listaSalas);
@@ -175,6 +195,10 @@ public class RelatoriosUI {
         }
     }
     
+    /**
+     * Lista a quantidade de ingressos vendidos para uma sala
+     * @param sala 
+     */
     public void listaVendaSala(Sala sala){
         int q = 0;
         for (Venda venda : listaVendas.getListaVendas()){
@@ -193,6 +217,10 @@ public class RelatoriosUI {
         }
     }
     
+    /**
+     * Interface que lista o relatório de vendas para uma seção
+     * @return 
+     */
     public boolean relatorioVendaSecoes(){
         try {
             SecaoUI secaoUi = new SecaoUI(listaSecoes, listaSalas, listaFilmes);
@@ -213,6 +241,10 @@ public class RelatoriosUI {
         }
     }
     
+    /**
+     * lista as vendas de uma seção
+     * @param secao 
+     */
     public void listaVendaSecao(Secao secao){
         int q = 0;
         for(Venda venda : listaVendas.getListaVendas()){
@@ -235,6 +267,10 @@ public class RelatoriosUI {
         }
     }
     
+    /**
+     * Retorna a sala mais utilizada nas seções
+     * @return 
+     */
     public boolean relatorioSalaMaisUtilizada(){
         Sala sala = retornaSalaMaisUtilizada();
         if(sala.equals(null)){
@@ -246,6 +282,11 @@ public class RelatoriosUI {
             return true;
         }
     }
+    
+    /**
+     * Retorna o objeto da sala mais utilizada
+     * @return 
+     */
     public Sala retornaSalaMaisUtilizada(){
         int q = 0;
         Sala s = new Sala();

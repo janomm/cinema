@@ -56,6 +56,9 @@ public class FilmeUI {
         } while (opcao != FilmeMenu.OP_VOLTAR);
     }
     
+    /**
+     * Interface que executa a inclusão de um Filme
+     */
     public void insereFilme(){
         String nome = Console.scanString("Nome: ");
         if(lista.filmeExiste(nome)){
@@ -67,6 +70,9 @@ public class FilmeUI {
         }
     }
     
+    /**
+     * Interface que executa a exclusão de um filme
+     */
     public void removeFilme(){
         listaFilmes();
         try{
@@ -85,6 +91,9 @@ public class FilmeUI {
         }
     }
     
+    /**
+     * Interface que executa a edição de um filme
+     */
     public void editaFilme(){
         listaFilmes();
         try{
@@ -100,6 +109,10 @@ public class FilmeUI {
         }
     }
     
+    /**
+     * Método que lista um filme pelo código do mesmo
+     * @param codigo 
+     */
     public void listaFilme(int codigo){
         for (Filme filme : lista.getListaFilmes()){
             if(filme.getCodigo().equals(codigo)){
@@ -117,6 +130,10 @@ public class FilmeUI {
         }
     }
     
+    /**
+     * Método que lista um filpe pelo nome do mesmo
+     * @param nome 
+     */
     public void listaFilme(String nome){
         for (Filme filme : lista.getListaFilmes()){
             if(filme.getNome().equalsIgnoreCase(nome)){
@@ -134,6 +151,9 @@ public class FilmeUI {
         }
     }
     
+    /**
+     * Método que lista todos os filmes
+     */
     public void listaFilmes(){
         System.out.println("-----------------------------\n");
         System.out.println(String.format("%-10s", "CÓDIGO") + "\t"
@@ -148,6 +168,9 @@ public class FilmeUI {
         }
     }
     
+    /**
+     * Método que faz a consulta e listagem de um filme
+     */
     public void consultaFilme(){
         String nome = Console.scanString("Nome: ");
         if(!lista.filmeExiste(nome)){
@@ -188,10 +211,21 @@ public class FilmeUI {
         } while (opcao != FilmeMenu.OP_VOLTAR);
     }
     
+    /**
+     * Interface que retorna se o arraylist contem pelo menos um filme cadastrado
+     * @return 
+     */
     public boolean existeFilme(){
         return (!lista.equals(null));
     }
     
+    
+    
+    /**
+     * Método que retorna o objeto filme igual ao código informado
+     * @param codigo
+     * @return 
+     */
     public Filme buscaFilme(int codigo){
         for (Filme filme : lista.getListaFilmes()){
             if(filme.getCodigo().equals(codigo)){

@@ -79,6 +79,10 @@ public class VendaUI {
         } while (opcao != VendaMenu.OP_VOLTAR);
     }
     
+    /**
+     * Interface que executa a inserção de uma venda
+     * @return 
+     */
     public boolean vendaSecao(){
         try{
             listaSecaoAssentos();
@@ -123,6 +127,11 @@ public class VendaUI {
         }
     }
     
+    /**
+     * Interface que lista os ingressos disponívels para uma seção
+     * @param numero
+     * @return 
+     */
     public Integer ingressosDisponiveis(Integer numero){
         Integer aDisp = 0;
         for (Secao secao : listaSecoes.getListaSecoes()){
@@ -141,6 +150,9 @@ public class VendaUI {
         return aDisp;
     }
     
+    /**
+     * Interface que lista todas as vendas de ingressos
+     */
     public void listaVenda(){
         System.out.println("-----------------------------\n");
         System.out.println(String.format("%-10s", "SEÇÃO") + "\t"
@@ -157,6 +169,9 @@ public class VendaUI {
         }
     }
     
+    /**
+     * Interface que lista os assentos disponíveis para uma seção
+     */
     public void listaSecaoAssentos(){
         System.out.println("-----------------------------\n");
         System.out.println(String.format("%-10s", "SEÇÃO") + "\t"
