@@ -6,7 +6,7 @@
 package view.menu;
 
 /**
- *
+ * Classe VendaMenu
  * @author Julliano
  */
 public class VendaMenu {
@@ -14,6 +14,10 @@ public class VendaMenu {
     public static final int OP_LISTAVENDA = 2;
     public static final int OP_VOLTAR = 0;
     
+    /**
+     * Opções principais
+     * @return 
+     */
     public static String getOpcoes(){
         return("\n--------------------------------------\n"
                 + "1- Incluir Venda\n"

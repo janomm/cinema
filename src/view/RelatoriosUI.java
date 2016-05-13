@@ -19,7 +19,7 @@ import util.DateUtil;
 import view.menu.RelatorioMenu;
 
 /**
- *
+ * Classe Interface de Relatórios
  * @author Julliano
  */
 public class RelatoriosUI {
@@ -28,6 +28,13 @@ public class RelatoriosUI {
     private RepositorioSala listaSalas;
     private RepositorioFilme listaFilmes;
 
+    /**
+     * Método Construtor
+     * @param listaVenda
+     * @param listaSecao
+     * @param listaSala
+     * @param listaFilme 
+     */
     public RelatoriosUI(RepositorioVenda listaVenda,RepositorioSecao listaSecao, RepositorioSala listaSala, RepositorioFilme listaFilme) {
         this.listaVendas = listaVenda;
         this.listaSecoes = listaSecao;
@@ -35,22 +42,41 @@ public class RelatoriosUI {
         this.listaFilmes = listaFilme;
     }
 
+    /**
+     * Método getListaVendas
+     * @return 
+     */
     public RepositorioVenda getListaVendas() {
         return listaVendas;
     }
 
+    /**
+     * Método getListaSecoes
+     * @return 
+     */
     public RepositorioSecao getListaSecoes() {
         return listaSecoes;
     }
 
+    /**
+     * Método getListaSalas
+     * @return 
+     */
     public RepositorioSala getListaSalas() {
         return listaSalas;
     }
 
+    /**
+     * Método getListaFilmes
+     * @return 
+     */
     public RepositorioFilme getListaFilmes() {
         return listaFilmes;
     }
     
+    /**
+     * Método de inicialização da interface
+     */
     public void executar(){
         int opcao = 0;
         do {

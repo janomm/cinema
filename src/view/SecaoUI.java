@@ -17,7 +17,7 @@ import util.DateUtil;
 import view.menu.SecaoMenu;
 
 /**
- *
+ * Classe Interface de Seção
  * @author Julliano
  */
 public class SecaoUI {
@@ -25,24 +25,45 @@ public class SecaoUI {
     private RepositorioSala listaSalas;
     private RepositorioFilme listaFilmes;
 
+    /**
+     * Método Construtor
+     * @param listaSecao
+     * @param listaSala
+     * @param listaFilme 
+     */
     public SecaoUI(RepositorioSecao listaSecao, RepositorioSala listaSala, RepositorioFilme listaFilme) {
         this.listaSecao = listaSecao;
         this.listaSalas = listaSala;
         this.listaFilmes = listaFilme;
     }
     
+    /**
+     * Método getListaSecao
+     * @return 
+     */
     public RepositorioSecao getListaSecao() {
         return listaSecao;
     }
     
+    /**
+     * Método getListaSala
+     * @return 
+     */
     public RepositorioSala getListaSala(){
         return listaSalas;
     }
     
+    /**
+     * Método getListaFilme
+     * @return 
+     */
     public RepositorioFilme getListaFilme(){
         return listaFilmes;
     }
     
+    /**
+     * Método de inicialização da interface
+     */
     public void executar(){
         int opcao = 0;
         do {

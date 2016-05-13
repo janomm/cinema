@@ -8,12 +8,13 @@ package cinema;
 import view.MainUI;
 
 /**
- *
+ * Classe inicial
  * @author Julliano
  */
 public class Cinema {
 
     /**
+     * Main
      * @param args the command line arguments
      */
     public static void main(String[] args) {

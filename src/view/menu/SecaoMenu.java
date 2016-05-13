@@ -6,7 +6,7 @@
 package view.menu;
 
 /**
- *
+ * Classe SecaoMenu
  * @author Julliano
  */
 public class SecaoMenu {
@@ -25,6 +25,10 @@ public class SecaoMenu {
     public static final int OP_CONSULTASALA = 2;
     public static final int OP_CONSULTAHORA = 3;
     
+    /**
+     * Opções principais
+     * @return 
+     */
     public static String getOpcoes(){
         return("\n--------------------------------------\n"
                 + "1- Incluir Seção\n"
@@ -36,6 +40,10 @@ public class SecaoMenu {
                 + "\n--------------------------------------");
     }
 
+    /**
+     * Opções de Alteração
+     * @return 
+     */
     public static String getOpcoesAlteracao(){
         return("\n--------------------------------------\n"
                 + "1- Altera Filme\n"
@@ -45,6 +53,10 @@ public class SecaoMenu {
                 + "\n--------------------------------------");
     }
     
+    /**
+     * Opções de Consulta
+     * @return 
+     */
     public static String getOpcoesConsulta(){
         return("\n--------------------------------------\n"
                 + "1- Consultar Seção por Filme\n"

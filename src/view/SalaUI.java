@@ -10,16 +10,23 @@ import repositorio.RepositorioSala;
 import util.Console;
 import view.menu.SalaMenu;
 /**
- *
+ * Classe Interface de Salas
  * @author Julliano
  */
 public class SalaUI {
     private RepositorioSala lista;
 
+    /**
+     * Método Construtor
+     * @param lista 
+     */
     public SalaUI(RepositorioSala lista) {
         this.lista = lista;
     }
     
+    /**
+     * Método de inicialização da interface
+     */
     public void executar(){
         int opcao = 0;
         do {

@@ -6,7 +6,7 @@
 package view.menu;
 
 /**
- *
+ * Classe ManiMenu
  * @author Julliano
  */
 public class MainMenu {
@@ -19,6 +19,10 @@ public class MainMenu {
     public static final int OP_RELATORIOS = 5;
     public static final int OP_SAIR = 0;
 
+    /**
+     * Opções principais
+     * @return 
+     */
     public static String getOpcoes() {
         return ("\n--------------------------------------\n"
                 + "1- Menu Filme\n"

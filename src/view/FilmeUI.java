@@ -10,16 +10,23 @@ import repositorio.RepositorioFilme;
 import util.Console;
 import view.menu.FilmeMenu;
 /**
- *
+ * Classe Interface de Filmes
  * @author Julliano
  */
 public class FilmeUI {
     private RepositorioFilme lista;
     
+    /**
+     * Método Construtor
+     * @param lista 
+     */
     public FilmeUI(RepositorioFilme lista) {
         this.lista = lista;
     }
 
+    /**
+     * Método de inicialização da interface
+     */
     public void executar(){
         int opcao = 0;
         do {
@@ -59,53 +66,66 @@ public class FilmeUI {
     /**
      * Interface que executa a inclusão de um Filme
      */
-    public void insereFilme(){
+    public boolean insereFilme(){
         String nome = Console.scanString("Nome: ");
         if(lista.filmeExiste(nome)){
             System.err.println("Filme já cadastrado.");
+            return false;
         } else {
             String genero = Console.scanString("Gênero: ");
             String sinopse = Console.scanString("Sinopse: ");
+            if(nome.equals("") || genero.equals("") || sinopse.equals("")){
+                System.err.println("Valores em branco.");
+                return false;
+            }
             lista.addFilme(nome,genero,sinopse);
+            return true;
         }
+        
     }
     
     /**
      * Interface que executa a exclusão de um filme
      */
-    public void removeFilme(){
+    public boolean removeFilme(){
         listaFilmes();
         try{
             int codigo = Console.scanInt("Código: ");
             if(!lista.filmeExiste(codigo)){
                 System.err.println("Filme não cadastrado.");
+                return false;
             } else {
                 if(lista.deletaFilme(codigo) != true){
                     System.err.println("Filme não Removido.");
+                    return false;
                 } else {
                     System.out.println("Filme Removido.");
+                    return true;
                 }
             }
         } catch (Exception ex){
             System.err.println("Código inválido");
+            return false;
         }
     }
     
     /**
      * Interface que executa a edição de um filme
      */
-    public void editaFilme(){
+    public boolean editaFilme(){
         listaFilmes();
         try{
             int codigo = Console.scanInt("Código: ");
             if(!lista.filmeExiste(codigo)){
                 System.err.println("Filme não cadastrado.");
+                return false;
             } else {
                 Filme f = lista.retornaFilme(codigo);
-                selecionaAlteracao(f);
+                return selecionaAlteracao(f);
             }
         } catch (Exception ex){
             System.err.println("Código inválido");
+            return false;
         }
     }
     
@@ -180,7 +200,7 @@ public class FilmeUI {
         }
     }
     
-    public void selecionaAlteracao(Filme filme){
+    public boolean selecionaAlteracao(Filme filme){
         int opcao = 0;
         do {
             System.out.println(FilmeMenu.getOpcoesAlteracao());
@@ -188,18 +208,26 @@ public class FilmeUI {
             switch (opcao) {
                 case FilmeMenu.OP_ALTERAGENERO:
                     String genero = Console.scanString("Gênero: ");
-                    if(lista.alteraGenero(filme, genero)){
-                        System.out.println("Gênero Alterado.");
+                    if(!genero.equals("")){
+                        if(lista.alteraGenero(filme, genero)){
+                            System.out.println("Gênero Alterado.");
+                        } else {
+                            System.err.println("Alteração não Realizada.");
+                        }
                     } else {
-                        System.err.println("Alteração não Realizada.");
+                        System.err.println("Gênero em branco.");
                     }
                     break;
                 case FilmeMenu.OP_ALTERASINOPSE:
                     String sinopse = Console.scanString("Sinopse: ");
-                    if(lista.alteraSinopse(filme, sinopse)){
-                        System.out.println("Sinopse Alterada.");
-                    } else{
-                        System.out.println("Alteração não Realizada.");
+                    if(!sinopse.equals("")){
+                        if(lista.alteraSinopse(filme, sinopse)){
+                            System.out.println("Sinopse Alterada.");
+                        } else{
+                            System.out.println("Alteração não Realizada.");
+                        }
+                    } else {
+                        System.err.println("Sinópse em branco.");
                     }
                     break;
                 case FilmeMenu.OP_VOLTAR:
@@ -209,6 +237,7 @@ public class FilmeUI {
                     System.err.println("Opção inválida..");
             }
         } while (opcao != FilmeMenu.OP_VOLTAR);
+        return true;
     }
     
     /**

@@ -6,7 +6,7 @@
 package view.menu;
 
 /**
- *
+ * Classe FilmeMenu
  * @author Julliano
  */
 public class FilmeMenu {
@@ -20,6 +20,10 @@ public class FilmeMenu {
     public static final int OP_ALTERAGENERO = 1;
     public static final int OP_ALTERASINOPSE = 2;
     
+    /**
+     * Opções principais
+     * @return 
+     */
     public static String getOpcoes(){
         return("\n--------------------------------------\n"
                 + "1- Incluir Filme\n"
@@ -31,6 +35,11 @@ public class FilmeMenu {
                 + "\n--------------------------------------");
         
     }
+    
+    /**
+     * Opções de Alteração
+     * @return 
+     */
     public static String getOpcoesAlteracao(){
         return("\n--------------------------------------\n"
                 + "1- Altera Gênero\n"

@@ -10,16 +10,23 @@ import java.util.List;
 import model.Sala;
 
 /**
- *
+ * Classe RepositorioSala
  * @author Julliano
  */
 public class RepositorioSala {
     private List<Sala> listaSalas;
     
+    /**
+     * Método Construtor
+     */
     public RepositorioSala(){
         listaSalas = new ArrayList<Sala>();
     }
 
+    /**
+     * Método getListaSalas
+     * @return 
+     */
     public List<Sala> getListaSalas() {
         return listaSalas;
     }

@@ -6,7 +6,7 @@
 package view.menu;
 
 /**
- *
+ * Classe RelatorioMenu
  * @author Julliano
  */
 public class RelatorioMenu {
@@ -18,6 +18,10 @@ public class RelatorioMenu {
     public static final int OP_SALAMAISUTILIZADAS = 6;
     public static final int OP_VOLTAR = 0;
     
+    /**
+     * Opções principais
+     * @return 
+     */
     public static String getOpcoes(){
         return("\n--------------------------------------\n"
                 + "1- Listar Vendas por Filme\n"

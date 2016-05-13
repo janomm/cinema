@@ -16,7 +16,7 @@ import util.DateUtil;
 import view.menu.VendaMenu;
 
 /**
- *
+ * Classe Interface de Vendas
  * @author Julliano
  */
 public class VendaUI {
@@ -25,6 +25,13 @@ public class VendaUI {
     private RepositorioSala listaSalas;
     private RepositorioFilme listaFilmes;
 
+    /**
+     * Método Construtor
+     * @param listaVenda
+     * @param listaSecao
+     * @param listaSala
+     * @param listaFilme 
+     */
     public VendaUI(RepositorioVenda listaVenda,RepositorioSecao listaSecao, RepositorioSala listaSala, RepositorioFilme listaFilme) {
         this.listaVendas = listaVenda;
         this.listaSecoes = listaSecao;
@@ -32,18 +39,34 @@ public class VendaUI {
         this.listaFilmes = listaFilme;
     }
     
+    /**
+     * Método getListaSecao
+     * @return 
+     */
     public RepositorioSecao getListaSecao() {
         return listaSecoes;
     }
     
+    /**
+     * Método getListaSala
+     * @return 
+     */
     public RepositorioSala getListaSala(){
         return listaSalas;
     }
     
+    /**
+     * Método getListaFilme
+     * @return 
+     */
     public RepositorioFilme getListaFilme(){
         return listaFilmes;
     }
     
+    /**
+     * Método getListaVendas
+     * @return 
+     */
     public RepositorioVenda getListaVendas(){
         return listaVendas;
     }

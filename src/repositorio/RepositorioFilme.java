@@ -10,17 +10,24 @@ import java.util.List;
 import model.Filme;
 
 /**
- *
+ * Classe RepositorioFilme
  * @author Julliano
  */
 public class RepositorioFilme {
    private List<Filme> listaFilmes;
     
-    public RepositorioFilme(){
+   /**
+    * Método Construtor
+    */ 
+   public RepositorioFilme(){
         listaFilmes = new ArrayList<Filme>();
     }
     
-    public List<Filme> getListaFilmes() {
+   /**
+    * Método getListaFilmes
+    * @return 
+    */ 
+   public List<Filme> getListaFilmes() {
         return listaFilmes;
     }
 

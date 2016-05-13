@@ -13,16 +13,23 @@ import model.Sala;
 import model.Secao;
 
 /**
- *
+ * Classe RepositorioSecao
  * @author Julliano
  */
 public class RepositorioSecao {
     private List<Secao> listaSecoes;
     
+    /**
+     * Método Construtor
+     */
     public RepositorioSecao(){
         listaSecoes = new ArrayList<>();
     }
 
+    /**
+     * Método getListaSecoes
+     * @return 
+     */
     public List<Secao> getListaSecoes() {
         return listaSecoes;
     }

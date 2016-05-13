@@ -12,19 +12,23 @@ import model.Secao;
 import model.Venda;
 
 /**
- *
+ * Classe RepositorioVenda
  * @author Julliano
  */
 public class RepositorioVenda {
     private List<Venda> listaVendas;
 
     /**
-     *
+     * Método Contrutor
      */
     public RepositorioVenda() {
         listaVendas = new ArrayList<>();
     }
     
+    /**
+     * Método getListaVendas
+     * @return 
+     */
     public List<Venda> getListaVendas() {
         return listaVendas;
     }
@@ -69,9 +73,4 @@ public class RepositorioVenda {
         }
         return false;
     }
-    
-
-    
-    
-    
 }

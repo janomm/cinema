@@ -15,7 +15,7 @@ import view.menu.MainMenu;
 import util.Console;
 
 /**
- *
+ * Classe Interface Principal do Sistema
  * @author Julliano
  */
 public class MainUI {
@@ -24,6 +24,9 @@ public class MainUI {
     private RepositorioSala listaSalas;
     private RepositorioVenda listaVendas;
     
+    /**
+     * Método Construtor
+     */
     public MainUI() {
         listaFilmes = new RepositorioFilme();
         listaSecoes = new RepositorioSecao();
@@ -37,6 +40,9 @@ public class MainUI {
         
     }
     
+    /**
+     * Método de inicialização da interface
+     */
     public void executar() {
         int opcao = 0;
         do {
